@@ -14,33 +14,31 @@ $(document).ready(function () {
         console.log(houseData);
     });
 
-    if ($("#about").val() == "hidden") {
-        $("#about").on("click", function () {
-            readMore("about");
-        });
-    } else {
-        $("#about").on("click", function () {
-            readLess("about");
-        });
-    }
-
+    $("#about").on("click", function () {
+        readMore("about");
+    });
     $("#history").on("click", function () {
-        if ($(".history").hide()) {
-            readMore("history");
-        } else {
-            readLess("history");
-        }
-    })
+        readMore("history");
+    });
 });
 
 
 function readMore(button) {
+    if ($("#" + button).val() == "hidden") {
+        console.log("hola")
+        $("." + button).slideDown();
+        $("#" + button).val("");
+        $("#" + button).val("shown");
+        $("#" + button).text("");
+        $("#" + button).text("Read Less");
+    } else {
+        $("." + button).slideUp();
+        $("#" + button).val("");
+        $("#" + button).val("hidden");
+        $("#" + button).text("");
+        $("#" + button).text("Read More");
+    }
 
-    $("." + button).slideDown();
-    $("#" + button).val("");
-    $("#" + button).val("shown");
-    $("#" + button).text("");
-    $("#" + button).text("Read Less");
 }
 
 function readLess(button) {
