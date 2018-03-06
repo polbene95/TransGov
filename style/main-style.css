@@ -1,0 +1,24 @@
+
+.list-inline {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.mailinfo {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+footer div {
+    text-align: center;
+}
+.table {
+    width: 100%;
+}
+.table td {
+    width: 20%;
+    text-align: center;
+}
+.state {
+    text-align: right;
+}
