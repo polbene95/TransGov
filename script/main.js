@@ -413,7 +413,7 @@ function leastLoayal(data) {
         var last_name = members[i].last_name;
         var name = first_name + " " + n + " " + last_name;
         var numMiss = members[i].total_votes;
-        var pctMiss = members[i].total_votes_pct;
+        var pctMiss = members[i].votes_with_party_pct;
 
         row.insertCell().innerHTML = name;
         row.insertCell().innerHTML = numMiss;
@@ -453,7 +453,7 @@ function mostLoyal(data) {
         var last_name = members[i].last_name;
         var name = first_name + " " + n + " " + last_name;
         var numMiss = members[i].total_votes;
-        var pctMiss = members[i].total_votes_pct;
+        var pctMiss = members[i].votes_with_party_pct;
 
         row.insertCell().innerHTML = name;
         row.insertCell().innerHTML = numMiss;
