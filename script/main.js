@@ -1,59 +1,47 @@
 $(".about").hide();
 $(".history").hide();
 
-var repCheck = document.getElementById("rep");
-var demCheck = document.getElementById("dem");
-var indCheck = document.getElementById("ind");
-var selector = document.getElementById("stateFilter");
-
 $(document).ready(function () {
 
+    if (window.location.pathname == "/senate-data.html" || "/senate_attendance.html") {
 
-    $.getJSON("https://nytimes-ubiqum.herokuapp.com/congress/113/senate", function (json) {
-        senateData = json;
-        console.log(senateData);
-        //        selectedFilter(senateData);
-        var selectedMembers = selectedFilter(senateData);
-        mainTable(selectedMembers, "senate-main-table");
-        stateList(senateData);
-
-        repCheck.addEventListener("click", function () {
-            console.log("hola");
-            selectedMembers = selectedFilter(senateData);
-            mainTable(selectedMembers, "senate-main-table");
-        }); 
-        demCheck.addEventListener("click", function () {
-            console.log("hola");
-            selectedMembers = selectedFilter(senateData);
-            mainTable(selectedMembers, "senate-main-table");
-        }); 
-        indCheck.addEventListener("click", function () {
-            console.log("hola");
-            selectedMembers = selectedFilter(senateData);
-            mainTable(selectedMembers, "senate-main-table");
+        $.getJSON("https://nytimes-ubiqum.herokuapp.com/congress/113/senate", function (json) {
+            senateData = json;
+            console.log(senateData);
+            if (window.location.pathname == "/senate-data.html") {
+                activeFilters(senateData, "senate-main-table");
+                console.log("hola");
+            } else if (window.location.pathname == "/senate_attendance.html") {
+                generalInfo(senateData);
+                leastEngaged(senateData);
+                mostEngaged(senateData);
+            }
         });
-        selector.addEventListener("change", function () {
-            console.log("hola");
-            selectedMembers = selectedFilter(senateData);
-            mainTable(selectedMembers, "senate-main-table");
-        }); 
-                                  
+    }
+    if (window.location.pathname == "/house-data.html" || "/house_attendance.html") {
+        $.getJSON("https://nytimes-ubiqum.herokuapp.com/congress/113/house", function (json) {
+            houseData = json;
+            console.log(houseData);
+            if (window.location.pathname == "/house-data.html") {
+                activeFilters(houseData, "house-main-table");
+            } else if (window.location.pathname == "/house_attendance.html") {
+                generalInfo(houseData);
+                leastEngaged(houseData);
+                mostEngaged(houseData);
+            }
+        });
+    }
 
-
-    });
-
-    $.getJSON("https://nytimes-ubiqum.herokuapp.com/congress/113/house", function (json) {
-        houseData = json;
-        console.log(houseData);
-    });
     $("#about").on("click", function () {
         readMore("about");
     });
     $("#history").on("click", function () {
         readMore("history");
     });
+
 });
 
+////////////////HOME FUNCTIONS//////////////////
 
 function readMore(button) {
     if ($("#" + button).val() == "hidden") {
@@ -82,53 +70,56 @@ function readLess(button) {
     $("#" + button).text("Read More");
 }
 
+///////////////CONGRES FUNCTIONS////////////////
+
 function mainTable(members, table) {
     var table = document.getElementById(table);
-    table.innerHTML = "";
-    //    var members = array.results["0"].members;
+    if (table != null) {
+        table.innerHTML = "";
 
-    for (let i = 0; i < members.length; i++) {
+        for (let i = 0; i < members.length; i++) {
 
-        var firstName = members[i].first_name;
-        var midName = members[i].middle_name;
-        if (midName == null) {
-            midName = "";
+            var firstName = members[i].first_name;
+            var midName = members[i].middle_name;
+            if (midName == null) {
+                midName = "";
+            }
+            var lastName = members[i].last_name;
+
+            var fullName = lastName + ", " + firstName + " " + midName;
+            var party = members[i].party;
+            var state = members[i].state;
+            var seniority = members[i].seniority;
+            var votes = members[i].votes_with_party_pct;
+            var url = members[i].url;
+
+            var row = document.createElement("tr");
+            var nameCol = document.createElement("td");
+            var partyCol = document.createElement("td");
+            var stateCol = document.createElement("td");
+            var seniorityCol = document.createElement("td");
+            var votesCol = document.createElement("td");
+            var ancor = document.createElement("a");
+
+            ancor.setAttribute("href", url);
+            ancor.setAttribute("target", "_blank");
+
+            ancor.append(fullName);
+            nameCol.append(ancor);
+            partyCol.append(party);
+            stateCol.append(state);
+            seniorityCol.append(seniority);
+            votesCol.append(votes + " %");
+
+            row.append(nameCol);
+            row.append(partyCol);
+            row.append(stateCol);
+            row.append(seniorityCol);
+            row.append(votesCol);
+
+            table.append(row);
+
         }
-        var lastName = members[i].last_name;
-
-        var fullName = lastName + ", " + firstName + " " + midName;
-        var party = members[i].party;
-        var state = members[i].state;
-        var seniority = members[i].seniority;
-        var votes = members[i].votes_with_party_pct;
-        var url = members[i].url;
-
-        var row = document.createElement("tr");
-        var nameCol = document.createElement("td");
-        var partyCol = document.createElement("td");
-        var stateCol = document.createElement("td");
-        var seniorityCol = document.createElement("td");
-        var votesCol = document.createElement("td");
-        var ancor = document.createElement("a");
-
-        ancor.setAttribute("href", url);
-        ancor.setAttribute("target", "_blank");
-
-        ancor.append(fullName);
-        nameCol.append(ancor);
-        partyCol.append(party);
-        stateCol.append(state);
-        seniorityCol.append(seniority);
-        votesCol.append(votes + " %");
-
-        row.append(nameCol);
-        row.append(partyCol);
-        row.append(stateCol);
-        row.append(seniorityCol);
-        row.append(votesCol);
-
-        table.append(row);
-
     }
 }
 
@@ -138,24 +129,26 @@ function stateList(array) {
     var newStates = [];
     var finalStates = [];
 
+    if (select != null) {
 
-    for (var i = 0; i < members.length; i++) {
-        var state = members[i].state;
-        newStates.push(state);
-    }
-
-    for (var j = 0; j < newStates.length; j++) {
-        if (finalStates.indexOf(newStates[j]) == -1) {
-            finalStates.push(newStates[j]);
+        for (var i = 0; i < members.length; i++) {
+            var state = members[i].state;
+            newStates.push(state);
         }
-    }
-    finalStates.sort();
-    for (var k = 0; k < finalStates.length; k++) {
-        var option = document.createElement("option");
-        option.setAttribute("value", finalStates[k], )
-        option.innerHTML = finalStates[k];
-        select.appendChild(option);
 
+        for (var j = 0; j < newStates.length; j++) {
+            if (finalStates.indexOf(newStates[j]) == -1) {
+                finalStates.push(newStates[j]);
+            }
+        }
+        finalStates.sort();
+        for (var k = 0; k < finalStates.length; k++) {
+            var option = document.createElement("option");
+            option.setAttribute("value", finalStates[k], )
+            option.innerHTML = finalStates[k];
+            select.appendChild(option);
+
+        }
     }
 }
 
@@ -195,3 +188,190 @@ function selectedFilter(array) {
 
     return selectedMembers;
 }
+
+function activeFilters(data, table) {
+
+    ////DROPDOWN GENERATOR////
+    stateList(data);
+    ////FILTERS ACTIVATION////
+    var repCheck = document.getElementById("rep");
+    var demCheck = document.getElementById("dem");
+    var indCheck = document.getElementById("ind");
+    var selector = document.getElementById("stateFilter");
+
+    var selectedMembers = selectedFilter(data);
+    mainTable(selectedMembers, table);
+
+    repCheck.addEventListener("click", function () {
+        selectedMembers = selectedFilter(data);
+        mainTable(selectedMembers, table);
+    });
+    demCheck.addEventListener("click", function () {
+        selectedMembers = selectedFilter(data);
+        mainTable(selectedMembers, table);
+    });
+    indCheck.addEventListener("click", function () {
+        selectedMembers = selectedFilter(data);
+        mainTable(selectedMembers, table);
+    });
+    selector.addEventListener("change", function () {
+        selectedMembers = selectedFilter(data);
+        mainTable(selectedMembers, table);
+    });
+}
+
+/////////////ATENDANCE FUNCTIONS////////////////
+
+var statistics = {
+
+    numberOfDemocrats: 0,
+    numberOfRepublicans: 0,
+    numberOfIndependens: 0,
+
+    votesWithPartyDem: 0,
+    votesWithPartyRep: 0,
+    votesWithPartyInd: 0,
+}
+
+function generalInfo(data) {
+    var array = data.results["0"].members;
+    var tbody = document.getElementById("statistics-data");
+
+    var numOfDem = statistics.numberOfDemocrats;
+    var numOfRep = statistics.numberOfRepublicans;
+    var numOfInd = statistics.numberOfIndependens;
+
+    var votDem = statistics.votesWithPartyDem;
+    var votRep = statistics.votesWithPartyRep;
+    var votInd = statistics.votesWithPartyInd;
+
+    var arrRep = [];
+    var arrDem = [];
+    var arrInd = [];
+
+    for (var i = 0; i < array.length; i++) {
+        var votesPct = array[i].votes_with_party_pct;
+        if (array[i].party == "D") {
+            numOfDem++;
+            votDem += parseFloat(votesPct);
+            arrDem.push(votesPct);
+        }
+        if (array[i].party == "R") {
+            numOfRep++;
+            votRep += parseFloat(votesPct);
+            arrRep.push(votesPct);
+        }
+        if (array[i].party == "I") {
+            numOfInd++;
+            votInd += parseFloat(votesPct);
+            arrInd.push(votesPct);
+        }
+    }
+
+    var avgDem = votDem / numOfDem;
+    var avgRep = votRep / numOfRep;
+    var avgInd = votInd / numOfInd;
+
+
+    $(".dem-num").text(numOfDem);
+    $(".rep-num").text(numOfRep);
+    $(".ind-num").text(numOfInd);
+    $(".dem-pct").text(avgDem.toFixed(2));
+    $(".rep-pct").text(avgRep.toFixed(2));
+    $(".ind-pct").text(avgInd.toFixed(2));
+
+
+}
+
+function leastEngaged(data) {
+    var members = data.results["0"].members;
+    var tbody = document.getElementById("least-engaged");
+    var lessMembers = [];
+
+    var sortedMembers = members.sort(function (a, b) {
+        return parseFloat(a.missed_votes) > parseFloat(b.missed_votes) ? 1 : parseFloat(a.missed_votes) < parseFloat(b.missed_votes) ? -1 : 0;
+    });
+
+    for (i = 0; i < sortedMembers.length; i++) {
+        if (i >= sortedMembers.length * 0.1) {
+            if (sortedMembers[i - 1].missed_votes == sortedMembers[i].missed_votes) {
+                lessMembers.push(sortedMembers[i].missed_votes);
+            } else {
+                break;
+            }
+        } else {
+            lessMembers.push(sortedMembers[i].missed_votes);
+        };
+        var row = document.createElement("tr");
+        var col = document.createElement("td");
+        tbody.appendChild(row);
+
+        var first_name = members[i].first_name;
+        var midle_name = members[i].middle_name;
+        var n = midle_name ? midle_name : "";
+        var last_name = members[i].last_name;
+        var name = first_name + " " + n + " " + last_name;
+        var numMiss = members[i].missed_votes;
+        var pctMiss = members[i].missed_votes_pct;
+
+        row.insertCell().innerHTML = name;
+        row.insertCell().innerHTML = numMiss;
+        row.insertCell().innerHTML = pctMiss;
+        tbody.append(row);
+    }
+    //    console.log(lessMembers);
+}
+
+function mostEngaged(data) {
+    var members = data.results["0"].members;
+    var tbody = document.getElementById("most-engaged");
+    var lessMembers = [];
+
+    var sortedMembers = members.sort(function (a, b) {
+        return parseFloat(a.missed_votes) < parseFloat(b.missed_votes) ? 1 : parseFloat(a.missed_votes) > parseFloat(b.missed_votes) ? -1 : 0;
+    });
+    console.log(sortedMembers);
+
+    for (i = 0; i < sortedMembers.length; i++) {
+        if (i >= sortedMembers.length * 0.1) {
+            if (sortedMembers[i - 1].missed_votes == sortedMembers[i].missed_votes) {
+                lessMembers.push(sortedMembers[i].missed_votes);
+            } else {
+                break;
+            }
+        } else {
+            lessMembers.push(sortedMembers[i].missed_votes);
+        };
+        var row = document.createElement("tr");
+        var col = document.createElement("td");
+        tbody.appendChild(row);
+
+        var first_name = members[i].first_name;
+        var midle_name = members[i].middle_name;
+        var n = midle_name ? midle_name : "";
+        var last_name = members[i].last_name;
+        var name = first_name + " " + n + " " + last_name;
+        var numMiss = members[i].missed_votes;
+        var pctMiss = members[i].missed_votes_pct;
+
+        row.insertCell().innerHTML = name;
+        row.insertCell().innerHTML = numMiss;
+        row.insertCell().innerHTML = pctMiss;
+        tbody.append(row);
+    }
+    //    console.log(lessMembers);
+}
+
+///////////PARTY LOYALTY FUNCTIONS/////////////
+
+
+
+
+
+
+
+
+
+
+
+

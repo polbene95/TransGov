@@ -36,7 +36,7 @@
                                 <a class="dropdown-item" href="house-data.html">House</a>
                             </div>
                         </div>
-                          <div class="dropdown col-12 col-xl-3 col-lg-3 col-md-3 col-sm-6">
+                        <div class="dropdown col-12 col-xl-3 col-lg-3 col-md-3 col-sm-6">
                             <a class="dropdown-toggle" data-toggle="dropdown">Attendance</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="senate_attendance.html">Senate</a>
@@ -54,50 +54,76 @@
                 </nav>
             </div>
         </header>
-        <div class="container">
+               <div class="container">
             <div class="row">
-                <div class="col-12 col-xl-7 col-lg-7 col-md-7 col-sm-12">
-                    <h2>Senators</h2>
-                    <p>First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.
-                    </p>
+                <div class="content_info1 col-12 col-xs-12 col-md-8 col-lg-8 col-xl-8">
+                    <h2>Attendance</h2>
+                    <p>The Constitution specifies that a majority of members constitutes a quorum to do business in each house. Representatives and senators rarely force the presence of a quorum by demanding quorum calls; thus, in most cases, debates continue even if a majority is not present.</p>
+
+                    <p>The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator stating "aye" or "no" when his or her name is announced. The House reserves roll-call votes for the most formal matters, as a roll-call of all 435 representatives takes quite some time; normally, members vote by electronic device. In the case of a tie, the motion in question fails. In the Senate, the Vice President may (if present) cast the tiebreaking vote.</p>
+                </div>
+                <div class="content_info2 col-12 col-xs-12 col-md-4 col-lg-4 col-xl-4">
+                    <h2>Senate at a glance</h2>
+                    <table class="table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Party</th>
+                                <th>Number of Reps</th>
+                                <th>% Voted with Prty</th>
+                            </tr>
+                        </thead>
+                        <tbody id="statistics-data">
+                            <tr>
+                                <td>Democrats</td>
+                                <td class="dem-num"></td>
+                                <td class="dem-pct"></td>
+                            </tr>
+                            <tr>
+                                <td>Republicans</td>
+                                <td class="rep-num"></td>
+                                <td class="rep-pct"></td>
+                            </tr>
+                            <tr>
+                                <td>Independents</td>
+                                <td class="ind-num"></td>
+                                <td class="ind-pct"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="row">
-                <div class="party col-12 col-sm-12 col-xl-6 col-lg-6 col-md-6">
-                    <div>
-                        <p>Filter by Party:</p>
-                    </div>
-                    <input type="checkbox" class="Dem" id="dem" name="party" value="D" checked>
-                    <label for="D">Democrat</label>
-                    <input type="checkbox" class="Rep" id="rep" name="party" value="R" checked>
-                    <label for="R">Republican</label>
-                    <input type="checkbox" class="Ind" id="ind" name="party" value="I" checked>
-                    <label for="I">Independent</label>
+                <div class="content_info3 col-12 col-xs-12 col-md-6 col-lg-6 col-xl-6">
+                    <h2>Least Engaged (Bottom 10% Attendance)</h2>
+                    <table class="table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Number of Missed Votes</th>
+                                <th>% Missed</th>
+                            </tr>
+                        </thead>
+                        <tbody id="least-engaged">
+                        </tbody>
+                    </table>
                 </div>
-                <div class="state col-12 col-sm-12 col-xl-6 col-lg-6 col-md-6">
-                    <div>
-                        <p>Filter by State:</p>
-                    </div>
-                    <div>
-                        <select id="stateFilter">
-                            <option>All</option>
-                        </select>
-                    </div>
+                <div class="content_info4 col-12 col-xs-12 col-md-6 col-lg-6 col-xl-6">
+                    <h2>Most Engaged (Top 10% Attendance)</h2>
+                    <table class="table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Number of Missed Votes</th>
+                                <th>% Missed</th>
+                            </tr>
+                        </thead>
+                        <tbody id="most-engaged">
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <td>Name</td>
-                        <td>Party</td>
-                        <td>State</td>
-                        <td>Seniority</td>
-                        <td>Votes Pct</td>
-                    </tr>
-                </thead>
-                <tbody id="senate-main-table"></tbody>
-            </table>
         </div>
+
         <footer class="container footer main-info">
             <div class="col-12">
                 <p>©2016 TGIF | All Rights Reserved</p>
@@ -108,6 +134,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!--    My JavaScript-->
     <script src="script/main.js"></script>
 </body>
 

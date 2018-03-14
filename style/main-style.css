@@ -1,3 +1,35 @@
+h1 {
+    font-family: 'Roboto Slab', serif;
+}
+h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.body {
+    font-family: 'Roboto Mono', monospace;
+}
+.header {
+    margin-top: 1%;
+}
+.tgif-info {
+    margin-bottom: 1%;
+}
+.texttgif {
+    display: flex;
+    align-items: flex-end;
+}
+
+.logo {
+    width: 50%;
+    height: 25%;
+}
+.img-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.img-home {
+    width: 100%;
+}
 
 .list-inline {
     display: flex;
@@ -21,4 +53,47 @@ footer div {
 }
 .state {
     text-align: right;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+.notification {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: crimson;
+    border-radius: 25px;
+    width: 100%;
+    padding: 5% 0;
+}
+/*CSS Loader*/
+.div-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 5%;
+}
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
