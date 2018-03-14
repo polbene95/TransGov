@@ -23,7 +23,7 @@ $(document).ready(function () {
         $.getJSON("https://nytimes-ubiqum.herokuapp.com/congress/113/senate", function (json) {
             senateData = json;
             generalInfo(senateData);
-            leastLoayal(senateData);
+            leastLoyal(senateData);
             mostLoyal(senateData);
         });
     }
@@ -384,7 +384,7 @@ function mostEngaged(data) {
     //    console.log(lessMembers);
 }
 
-function leastLoayal(data) {
+function leastLoyal(data) {
     var members = data.results["0"].members;
     var tbody = document.getElementById("least-engaged");
     var lessMembers = [];
