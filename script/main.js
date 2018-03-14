@@ -3,31 +3,49 @@ $(".history").hide();
 
 $(document).ready(function () {
 
-    if (window.location.pathname == "/senate-data.html" || "/senate_attendance.html") {
+    if (window.location.pathname == "/senate-data.html" || "/senate_attendance.html" || "/senate_house_party_loyalty.html") {
 
         $.getJSON("https://nytimes-ubiqum.herokuapp.com/congress/113/senate", function (json) {
             senateData = json;
             console.log(senateData);
             if (window.location.pathname == "/senate-data.html") {
+
                 activeFilters(senateData, "senate-main-table");
-                console.log("hola");
-            } else if (window.location.pathname == "/senate_attendance.html") {
+
+            }
+            if (window.location.pathname == "/senate_attendance.html") {
+
                 generalInfo(senateData);
                 leastEngaged(senateData);
                 mostEngaged(senateData);
             }
+            if (window.location.pathname == "/senate_house_party_loyalty.html") {
+
+                generalInfo(senateData);
+                leastLoayal(senateData);
+                mostLoyal(senateData);
+            }
         });
     }
-    if (window.location.pathname == "/house-data.html" || "/house_attendance.html") {
+    if (window.location.pathname == "/house-data.html" || "/house_attendance.html" || /house_house_party_loyalty.html ) {
         $.getJSON("https://nytimes-ubiqum.herokuapp.com/congress/113/house", function (json) {
             houseData = json;
             console.log(houseData);
             if (window.location.pathname == "/house-data.html") {
+
                 activeFilters(houseData, "house-main-table");
-            } else if (window.location.pathname == "/house_attendance.html") {
+            }
+            if (window.location.pathname == "/house_attendance.html") {
+
                 generalInfo(houseData);
                 leastEngaged(houseData);
                 mostEngaged(houseData);
+            }
+            if (window.location.pathname == "/house_house_party_loyalty.html") {
+                
+                generalInfo(houseData);
+                leastLoyal(houseData);
+                mostLoyal(houseData);
             }
         });
     }
@@ -41,7 +59,7 @@ $(document).ready(function () {
 
 });
 
-////////////////HOME FUNCTIONS//////////////////
+///////////////////////////HOME FUNCTIONS//////////////////////////////////
 
 function readMore(button) {
     if ($("#" + button).val() == "hidden") {
@@ -70,7 +88,7 @@ function readLess(button) {
     $("#" + button).text("Read More");
 }
 
-///////////////CONGRES FUNCTIONS////////////////
+//////////////////////////CONGRES FUNCTIONS////////////////////////////////
 
 function mainTable(members, table) {
     var table = document.getElementById(table);
@@ -220,7 +238,7 @@ function activeFilters(data, table) {
     });
 }
 
-/////////////ATENDANCE FUNCTIONS////////////////
+/////////////ATENDANCE FUNCTIONS AND PARTY LOYALTY FUNCTIONS///////////////
 
 var statistics = {
 
@@ -362,16 +380,81 @@ function mostEngaged(data) {
     //    console.log(lessMembers);
 }
 
-///////////PARTY LOYALTY FUNCTIONS/////////////
+function leastLoayal(data) {
+    var members = data.results["0"].members;
+    var tbody = document.getElementById("least-engaged");
+    var lessMembers = [];
 
+    var sortedMembers = members.sort(function (a, b) {
+        return parseFloat(a.total_votes) > parseFloat(b.total_votes) ? 1 : parseFloat(a.total_votes) < parseFloat(b.total_votes) ? -1 : 0;
+    });
 
+    for (i = 0; i < sortedMembers.length; i++) {
+        if (i >= sortedMembers.length * 0.1) {
+            if (sortedMembers[i - 1].total_votes == sortedMembers[i].total_votes) {
+                lessMembers.push(sortedMembers[i].total_votes);
+            } else {
+                break;
+            }
+        } else {
+            lessMembers.push(sortedMembers[i].total_votes);
+        };
+        var row = document.createElement("tr");
+        var col = document.createElement("td");
+        tbody.appendChild(row);
 
+        var first_name = members[i].first_name;
+        var midle_name = members[i].middle_name;
+        var n = midle_name ? midle_name : "";
+        var last_name = members[i].last_name;
+        var name = first_name + " " + n + " " + last_name;
+        var numMiss = members[i].total_votes;
+        var pctMiss = members[i].total_votes_pct;
 
+        row.insertCell().innerHTML = name;
+        row.insertCell().innerHTML = numMiss;
+        row.insertCell().innerHTML = pctMiss;
+        tbody.append(row);
+    }
+    //    console.log(lessMembers);
+}
 
+function mostLoyal(data) {
+    var members = data.results["0"].members;
+    var tbody = document.getElementById("most-engaged");
+    var lessMembers = [];
 
+    var sortedMembers = members.sort(function (a, b) {
+        return parseFloat(a.total_votes) < parseFloat(b.total_votes) ? 1 : parseFloat(a.total_votes) > parseFloat(b.total_votes) ? -1 : 0;
+    });
+    console.log(sortedMembers);
 
+    for (i = 0; i < sortedMembers.length; i++) {
+        if (i >= sortedMembers.length * 0.1) {
+            if (sortedMembers[i - 1].total_votes == sortedMembers[i].total_votes) {
+                lessMembers.push(sortedMembers[i].total_votes);
+            } else {
+                break;
+            }
+        } else {
+            lessMembers.push(sortedMembers[i].total_votes);
+        };
+        var row = document.createElement("tr");
+        var col = document.createElement("td");
+        tbody.appendChild(row);
 
+        var first_name = members[i].first_name;
+        var midle_name = members[i].middle_name;
+        var n = midle_name ? midle_name : "";
+        var last_name = members[i].last_name;
+        var name = first_name + " " + n + " " + last_name;
+        var numMiss = members[i].total_votes;
+        var pctMiss = members[i].total_votes_pct;
 
-
-
-
+        row.insertCell().innerHTML = name;
+        row.insertCell().innerHTML = numMiss;
+        row.insertCell().innerHTML = pctMiss;
+        tbody.append(row);
+    }
+    //    console.log(lessMembers); 
+}
