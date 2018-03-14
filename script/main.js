@@ -1,5 +1,7 @@
 $(".about").hide();
 $(".history").hide();
+$(".on-loading").hide();
+$(".div-loader").show();
 
 $(document).ready(function () {
 
@@ -8,6 +10,8 @@ $(document).ready(function () {
         $.getJSON("https://nytimes-ubiqum.herokuapp.com/congress/113/senate", function (json) {
             senateData = json;
             activeFilters(senateData, "senate-main-table");
+            $(".div-loader").hide();
+            $(".on-loading").show();
         });
     }
     if (window.location.pathname == "/TransGov/senate_attendance.html") {
@@ -16,6 +20,8 @@ $(document).ready(function () {
             generalInfo(senateData);
             leastEngaged(senateData);
             mostEngaged(senateData);
+            $(".div-loader").hide();
+            $(".on-loading").show();
         });
 
     }
@@ -25,15 +31,17 @@ $(document).ready(function () {
             generalInfo(senateData);
             leastLoyal(senateData);
             mostLoyal(senateData);
+            $(".div-loader").hide();
+            $(".on-loading").show();
         });
     }
 
     if (window.location.pathname == "/TransGov/house-data.html") {
         $.getJSON("https://nytimes-ubiqum.herokuapp.com/congress/113/house", function (json) {
             houseData = json;
-            console.log(houseData);
-
             activeFilters(houseData, "house-main-table");
+            $(".div-loader").hide();
+            $(".on-loading").show();
         });
     }
     if (window.location.pathname == "/TransGov/house_attendance.html") {
@@ -43,6 +51,8 @@ $(document).ready(function () {
             generalInfo(houseData);
             leastEngaged(houseData);
             mostEngaged(houseData);
+            $(".div-loader").hide();
+            $(".on-loading").show();
         });
     }
     if (window.location.pathname == "/TransGov/house_house_party_loyalty.html") {
@@ -51,6 +61,8 @@ $(document).ready(function () {
             generalInfo(houseData);
             leastLoyal(houseData);
             mostLoyal(houseData);
+            $(".div-loader").hide();
+            $(".on-loading").show();
         });
     }
 

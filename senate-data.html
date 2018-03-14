@@ -36,7 +36,7 @@
                                 <a class="dropdown-item" href="house-data.html">House</a>
                             </div>
                         </div>
-                          <div class="dropdown col-12 col-xl-3 col-lg-3 col-md-3 col-sm-6">
+                        <div class="dropdown col-12 col-xl-3 col-lg-3 col-md-3 col-sm-6">
                             <a class="dropdown-toggle" data-toggle="dropdown">Attendance</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="senate_attendance.html">Senate</a>
@@ -55,48 +55,53 @@
             </div>
         </header>
         <div class="container">
-            <div class="row">
-                <div class="col-12 col-xl-7 col-lg-7 col-md-7 col-sm-12">
-                    <h2>Senators</h2>
-                    <p>First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.
-                    </p>
-                </div>
+            <div class="div-loader">
+                <div class="loader"></div>
             </div>
-            <div class="row">
-                <div class="party col-12 col-sm-12 col-xl-6 col-lg-6 col-md-6">
-                    <div>
-                        <p>Filter by Party:</p>
+            <div class="on-loading">
+                <div class="row">
+                    <div class="col-12 col-xl-7 col-lg-7 col-md-7 col-sm-12">
+                        <h2>Senators</h2>
+                        <p>First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.
+                        </p>
                     </div>
-                    <input type="checkbox" class="Dem" id="dem" name="party" value="D" checked>
-                    <label for="D">Democrat</label>
-                    <input type="checkbox" class="Rep" id="rep" name="party" value="R" checked>
-                    <label for="R">Republican</label>
-                    <input type="checkbox" class="Ind" id="ind" name="party" value="I" checked>
-                    <label for="I">Independent</label>
                 </div>
-                <div class="state col-12 col-sm-12 col-xl-6 col-lg-6 col-md-6">
-                    <div>
-                        <p>Filter by State:</p>
+                <div class="row">
+                    <div class="party col-12 col-sm-12 col-xl-6 col-lg-6 col-md-6">
+                        <div>
+                            <p>Filter by Party:</p>
+                        </div>
+                        <input type="checkbox" class="Dem" id="dem" name="party" value="D" checked>
+                        <label for="D">Democrat</label>
+                        <input type="checkbox" class="Rep" id="rep" name="party" value="R" checked>
+                        <label for="R">Republican</label>
+                        <input type="checkbox" class="Ind" id="ind" name="party" value="I" checked>
+                        <label for="I">Independent</label>
                     </div>
-                    <div>
-                        <select id="stateFilter">
+                    <div class="state col-12 col-sm-12 col-xl-6 col-lg-6 col-md-6">
+                        <div>
+                            <p>Filter by State:</p>
+                        </div>
+                        <div>
+                            <select id="stateFilter">
                             <option>All</option>
                         </select>
+                        </div>
                     </div>
                 </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Party</td>
+                            <td>State</td>
+                            <td>Seniority</td>
+                            <td>Votes Pct</td>
+                        </tr>
+                    </thead>
+                    <tbody id="senate-main-table"></tbody>
+                </table>
             </div>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <td>Name</td>
-                        <td>Party</td>
-                        <td>State</td>
-                        <td>Seniority</td>
-                        <td>Votes Pct</td>
-                    </tr>
-                </thead>
-                <tbody id="senate-main-table"></tbody>
-            </table>
         </div>
         <footer class="container footer main-info">
             <div class="col-12">
