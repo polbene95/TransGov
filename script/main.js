@@ -390,18 +390,18 @@ function leastLoyal(data) {
     var lessMembers = [];
 
     var sortedMembers = members.sort(function (a, b) {
-        return parseFloat(a.total_votes) > parseFloat(b.total_votes) ? 1 : parseFloat(a.total_votes) < parseFloat(b.total_votes) ? -1 : 0;
+        return parseFloat(a.votes_with_party_pct) > parseFloat(b.votes_with_party_pct) ? 1 : parseFloat(a.votes_with_party_pct) < parseFloat(b.votes_with_party_pct) ? -1 : 0;
     });
 
     for (i = 0; i < sortedMembers.length; i++) {
         if (i >= sortedMembers.length * 0.1) {
-            if (sortedMembers[i - 1].total_votes == sortedMembers[i].total_votes) {
-                lessMembers.push(sortedMembers[i].total_votes);
+            if (sortedMembers[i - 1].votes_with_party_pct == sortedMembers[i].votes_with_party_pct) {
+                lessMembers.push(sortedMembers[i].votes_with_party_pct);
             } else {
                 break;
             }
         } else {
-            lessMembers.push(sortedMembers[i].total_votes);
+            lessMembers.push(sortedMembers[i].votes_with_party_pct);
         };
         var row = document.createElement("tr");
         var col = document.createElement("td");
@@ -429,19 +429,19 @@ function mostLoyal(data) {
     var lessMembers = [];
 
     var sortedMembers = members.sort(function (a, b) {
-        return parseFloat(a.total_votes) < parseFloat(b.total_votes) ? 1 : parseFloat(a.total_votes) > parseFloat(b.total_votes) ? -1 : 0;
+        return parseFloat(a.votes_with_party_pct) < parseFloat(b.votes_with_party_pct) ? 1 : parseFloat(a.votes_with_party_pct) > parseFloat(b.votes_with_party_pct) ? -1 : 0;
     });
     console.log(sortedMembers);
 
     for (i = 0; i < sortedMembers.length; i++) {
         if (i >= sortedMembers.length * 0.1) {
-            if (sortedMembers[i - 1].total_votes == sortedMembers[i].total_votes) {
-                lessMembers.push(sortedMembers[i].total_votes);
+            if (sortedMembers[i - 1].votes_with_party_pct == sortedMembers[i].votes_with_party_pct) {
+                lessMembers.push(sortedMembers[i].votes_with_party_pct);
             } else {
                 break;
             }
         } else {
-            lessMembers.push(sortedMembers[i].total_votes);
+            lessMembers.push(sortedMembers[i].votes_with_party_pct);
         };
         var row = document.createElement("tr");
         var col = document.createElement("td");
