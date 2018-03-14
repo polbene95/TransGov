@@ -3,23 +3,23 @@ $(".history").hide();
 
 $(document).ready(function () {
 
-    if (window.location.pathname == "/senate-data.html" || "/senate_attendance.html" || "/senate_house_party_loyalty.html") {
+    if (window.location.pathname == "/TransGov/senate-data.html" || "/TransGov/senate_attendance.html" || "/TransGov/senate_house_party_loyalty.html") {
 
         $.getJSON("https://nytimes-ubiqum.herokuapp.com/congress/113/senate", function (json) {
             senateData = json;
             console.log(senateData);
-            if (window.location.pathname == "/senate-data.html") {
+            if (window.location.pathname == "/TransGov/senate-data.html") {
 
                 activeFilters(senateData, "senate-main-table");
 
             }
-            if (window.location.pathname == "/senate_attendance.html") {
+            if (window.location.pathname == "/TransGov/senate_attendance.html") {
 
                 generalInfo(senateData);
                 leastEngaged(senateData);
                 mostEngaged(senateData);
             }
-            if (window.location.pathname == "/senate_house_party_loyalty.html") {
+            if (window.location.pathname == "/TransGov/senate_house_party_loyalty.html") {
 
                 generalInfo(senateData);
                 leastLoayal(senateData);
@@ -27,21 +27,21 @@ $(document).ready(function () {
             }
         });
     }
-    if (window.location.pathname == "/house-data.html" || "/house_attendance.html" || "/house_house_party_loyalty.html" ) {
+    if (window.location.pathname == "/TransGov/house-data.html" || "/TransGov/house_attendance.html" || "/TransGov/house_house_party_loyalty.html" ) {
         $.getJSON("https://nytimes-ubiqum.herokuapp.com/congress/113/house", function (json) {
             houseData = json;
             console.log(houseData);
-            if (window.location.pathname == "/house-data.html") {
+            if (window.location.pathname == "/TransGov/house-data.html") {
 
                 activeFilters(houseData, "house-main-table");
             }
-            if (window.location.pathname == "/house_attendance.html") {
+            if (window.location.pathname == "/TransGov/house_attendance.html") {
 
                 generalInfo(houseData);
                 leastEngaged(houseData);
                 mostEngaged(houseData);
             }
-            if (window.location.pathname == "/house_house_party_loyalty.html") {
+            if (window.location.pathname == "/TransGov/house_house_party_loyalty.html") {
                 
                 generalInfo(houseData);
                 leastLoyal(houseData);
