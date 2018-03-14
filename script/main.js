@@ -27,7 +27,7 @@ $(document).ready(function () {
             }
         });
     }
-    if (window.location.pathname == "/house-data.html" || "/house_attendance.html" || /house_house_party_loyalty.html ) {
+    if (window.location.pathname == "/house-data.html" || "/house_attendance.html" || "/house_house_party_loyalty.html" ) {
         $.getJSON("https://nytimes-ubiqum.herokuapp.com/congress/113/house", function (json) {
             houseData = json;
             console.log(houseData);
