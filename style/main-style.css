@@ -80,13 +80,23 @@ a:hover {
 .navbar {
     padding: 0;
     background-color: yellow;
-    height: 10%;
+    min-height: 10%;
+    
 
 }
-.navbar a {
+.navbar a, .navbar h2 {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.navbar h2 {
+    font-weight: bold;
+    font-size: 1.2rem;
+    
+}
+.list-inline {
+    display: flex;
+    justify-content: space-between;
 }
 .fixed-top {
     top:75px;

@@ -1,7 +1,9 @@
 $(".about").hide();
 $(".history").hide();
-$(".on-loading").hide();
-$(".div-loader").show();
+if (window.location.pathname != "/TransGov/house-data.html") {
+    $(".on-loading").hide();
+    $(".div-loader").show();
+} 
 
 $(document).ready(function () {
 
@@ -38,10 +40,10 @@ $(document).ready(function () {
 
     if (window.location.pathname == "/TransGov/house-data.html") {
         $.getJSON("https://nytimes-ubiqum.herokuapp.com/congress/113/house", function (json) {
-            houseData = json;
-            activeFilters(houseData, "house-main-table");
-            $(".div-loader").hide();
-            $(".on-loading").show();
+            //            houseData = json;
+            //            activeFilters(houseData, "house-main-table");
+            //            $(".div-loader").hide();
+            //            $(".on-loading").show();
         });
     }
     if (window.location.pathname == "/TransGov/house_attendance.html") {
@@ -78,35 +80,35 @@ $(document).ready(function () {
 
 /////////////////////////////////CSS FUNCTIONS//////////////////////////////
 
-function navbarScroll () {
-    
-    if (window.scrollY >= 0){
-         $(".navbar").css("top","75px");
+function navbarScroll() {
+
+    if (window.scrollY >= 0) {
+        $(".navbar").css("top", "75px");
     }
-    if (window.scrollY >= 5){
-         $(".navbar").css("top","65px");
+    if (window.scrollY >= 5) {
+        $(".navbar").css("top", "65px");
     }
-    if (window.scrollY >= 10){
-         $(".navbar").css("top","55px");
+    if (window.scrollY >= 10) {
+        $(".navbar").css("top", "55px");
     }
-    if (window.scrollY >= 15){
-         $(".navbar").css("top","45px");
+    if (window.scrollY >= 15) {
+        $(".navbar").css("top", "45px");
     }
-    if (window.scrollY >= 20){
-         $(".navbar").css("top","35px");
+    if (window.scrollY >= 20) {
+        $(".navbar").css("top", "35px");
     }
-    if (window.scrollY >= 25){
-         $(".navbar").css("top","25px");
-    } 
-    if (window.scrollY >= 30){
-        $(".navbar").css("top","15px");
+    if (window.scrollY >= 25) {
+        $(".navbar").css("top", "25px");
     }
-    if (window.scrollY >= 35){
-        $(".navbar").css("top","5px");
-    } 
-    if (window.scrollY >= 40){
-        $(".navbar").css("top","0px");
-    } 
+    if (window.scrollY >= 30) {
+        $(".navbar").css("top", "15px");
+    }
+    if (window.scrollY >= 35) {
+        $(".navbar").css("top", "5px");
+    }
+    if (window.scrollY >= 40) {
+        $(".navbar").css("top", "0px");
+    }
 }
 
 ////////////////////////////////HOME FUNCTIONS//////////////////////////////
@@ -340,7 +342,7 @@ function generalInfo(data) {
         }
         numOfTtl++;
         votTtl += parseFloat(votesPct);
-        
+
     }
 
     var avgDem = votDem / numOfDem;

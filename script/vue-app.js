@@ -76,4 +76,4 @@ var app = new Vue({
 
         }
     }
-})
+});

@@ -28,22 +28,23 @@
                 <nav class="col-12 navbar fixed-top">
                     <div class="list-inline row">
                         <span class="border-1"></span>
-                        <div class="col-12 col-xl-3 col-lg-3 col-md-3 col-sm-6"><a class="texthome" href="index.html">Home</a></div>
-                        <div class="dropdown col-12 col-xl-3 col-lg-3 col-md-3 col-sm-6">
+                        <div class="col-12 col-xl-2 col-lg-2 col-md-2 col-sm-12"><a class="texthome" href="index.html">Home</a></div>
+                        <div class="dropdown col-12 col-xl-2 col-lg-2 col-md-2 col-sm-12">
                             <a class="dropdown-toggle" data-toggle="dropdown">Congress 113</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="senate-data.html">Senate</a>
                                 <a class="dropdown-item" href="house-data.html">House</a>
                             </div>
                         </div>
-                        <div class="dropdown col-12 col-xl-3 col-lg-3 col-md-3 col-sm-6">
+                        <div class="name-site col-12 col-xl-2 col-lg-2 col-md-2 col-sm-12"><h2>House</h2></div>
+                        <div class="dropdown col-12 col-xl-2 col-lg-2 col-md-2 col-sm-12">
                             <a class="dropdown-toggle" data-toggle="dropdown">Attendance</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="senate_attendance.html">Senate</a>
                                 <a class="dropdown-item" href="house_attendance.html">House</a>
                             </div>
                         </div>
-                        <div class="dropdown col-12 col-xl-3 col-lg-3 col-md-3 col-sm-6">
+                        <div class="dropdown col-12 col-xl-2 col-lg-2 col-md-2 col-sm-12">
                             <a class="dropdown-toggle" data-toggle="dropdown">Party Loyalty</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="senate_house_party_loyalty.html">Senate</a>
@@ -55,6 +56,7 @@
             </div>
         </header>
         <div class="container">
+           <div class="on-loading">
             <div class="row">
                 <div class="col-12">
                     <h2>Congressmen</h2>
@@ -86,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <div class="div-loader" v-if = "allMembers.length == 0">
+            <div class="div-loader" v-if="allMembers.length == 0">
                 <div class="loader"></div>
             </div>
             <table class="table table-hover" v-if="members.length > 0" v-cloak>
@@ -112,6 +114,7 @@
                 </tbody>
             </table>
         </div>
+        </div>
         <div class="notification-container container">
             <div class="notification is-danger" v-if="canShowAdvice && members.length == 0">
                 No member with this criteria. Try to change State or Party to solve it.
@@ -130,6 +133,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!--    My JavaScript-->
     <script src="script/vue-app.js"></script>
+    <script src="script/main.js"></script>
 </body>
 
 </html>
