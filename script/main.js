@@ -3,7 +3,11 @@ $(".history").hide();
 if (window.location.pathname != "/TransGov/house-data.html") {
     $(".on-loading").hide();
     $(".div-loader").show();
-} 
+}
+if (window.location.pathname == "/TransGov/index.html") {
+    $(".on-loading").show();
+}
+
 
 $(document).ready(function () {
 
