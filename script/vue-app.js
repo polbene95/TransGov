@@ -21,6 +21,10 @@ var app = new Vue({
                 app.canShowAdvice = true;
 
             });
+
+        },
+        fetchJson : function (urls) {
+            return Promise.all(urls).map(url => this.getData(url));
         },
         statesArray: function () {
             var allStates = $(this.members).map(function () {

@@ -72,10 +72,44 @@ $(document).ready(function () {
     $("#history").on("click", function () {
         readMore("history");
     });
+    $(document).on("scroll", navbarScroll);
 
 });
 
-///////////////////////////HOME FUNCTIONS//////////////////////////////////
+/////////////////////////////////CSS FUNCTIONS//////////////////////////////
+
+function navbarScroll () {
+    
+    if (window.scrollY >= 0){
+         $(".navbar").css("top","75px");
+    }
+    if (window.scrollY >= 5){
+         $(".navbar").css("top","65px");
+    }
+    if (window.scrollY >= 10){
+         $(".navbar").css("top","55px");
+    }
+    if (window.scrollY >= 15){
+         $(".navbar").css("top","45px");
+    }
+    if (window.scrollY >= 20){
+         $(".navbar").css("top","35px");
+    }
+    if (window.scrollY >= 25){
+         $(".navbar").css("top","25px");
+    } 
+    if (window.scrollY >= 30){
+        $(".navbar").css("top","15px");
+    }
+    if (window.scrollY >= 35){
+        $(".navbar").css("top","5px");
+    } 
+    if (window.scrollY >= 40){
+        $(".navbar").css("top","0px");
+    } 
+}
+
+////////////////////////////////HOME FUNCTIONS//////////////////////////////
 
 function readMore(button) {
     if ($("#" + button).val() == "hidden") {
@@ -104,7 +138,7 @@ function readLess(button) {
     $("#" + button).text("Read More");
 }
 
-//////////////////////////CONGRES FUNCTIONS////////////////////////////////
+////////////////////////////////CONGRES FUNCTIONS///////////////////////////
 
 function mainTable(members, table) {
     var table = document.getElementById(table);
@@ -261,10 +295,12 @@ var statistics = {
     numberOfDemocrats: 0,
     numberOfRepublicans: 0,
     numberOfIndependens: 0,
+    totalNumberOfRepresentants: 0,
 
     votesWithPartyDem: 0,
     votesWithPartyRep: 0,
     votesWithPartyInd: 0,
+    totalVotesWithPartyPct: 0
 }
 
 function generalInfo(data) {
@@ -274,10 +310,12 @@ function generalInfo(data) {
     var numOfDem = statistics.numberOfDemocrats;
     var numOfRep = statistics.numberOfRepublicans;
     var numOfInd = statistics.numberOfIndependens;
+    var numOfTtl = statistics.totalNumberOfRepresentants;
 
     var votDem = statistics.votesWithPartyDem;
     var votRep = statistics.votesWithPartyRep;
     var votInd = statistics.votesWithPartyInd;
+    var votTtl = statistics.totalVotesWithPartyPct;
 
     var arrRep = [];
     var arrDem = [];
@@ -300,19 +338,25 @@ function generalInfo(data) {
             votInd += parseFloat(votesPct);
             arrInd.push(votesPct);
         }
+        numOfTtl++;
+        votTtl += parseFloat(votesPct);
+        
     }
 
     var avgDem = votDem / numOfDem;
     var avgRep = votRep / numOfRep;
     var avgInd = votInd / numOfInd;
+    var avgTtl = votTtl / numOfTtl;
 
 
     $(".dem-num").text(numOfDem);
     $(".rep-num").text(numOfRep);
     $(".ind-num").text(numOfInd);
+    $(".ttl-num").text(numOfTtl);
     $(".dem-pct").text(avgDem.toFixed(2));
     $(".rep-pct").text(avgRep.toFixed(2));
     $(".ind-pct").text(avgInd.toFixed(2));
+    $(".ttl-pct").text(avgTtl.toFixed(2));
 
 
 }
